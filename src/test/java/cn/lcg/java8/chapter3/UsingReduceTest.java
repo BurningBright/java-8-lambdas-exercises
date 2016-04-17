@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Test;
-
+/**
+ * @Description 测试Reduce的累加器、合并器[好像没什么用]
+ * @author leon
+ * @date 2016年4月17日 下午9:32:26
+ */
 public class UsingReduceTest {
     
     @Test

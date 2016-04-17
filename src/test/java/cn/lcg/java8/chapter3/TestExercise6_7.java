@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * @Description 测试字符串流的效果
+ * @author leon
+ * @date 2016年4月17日 下午9:31:57
+ */
 public class TestExercise6_7 {
     
     @Test
