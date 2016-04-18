@@ -47,7 +47,7 @@ public class SimpleData {
     public static final Animal deer = new Animal("Sika deer", getDate("2014-04-17"), 2);
     
     public static final Zoo hzZoo = new Zoo("hangzhou zoo", Arrays.asList(python, tiger, dolphin), Arrays.asList(pythonGroup, tigerGroup, dolphinGroup));
-    public static final Zoo shZoo = new Zoo("shanghai zoo", Arrays.asList(horse, deer), Arrays.asList(horseGroup, zhouXun));
+    public static final Zoo shZoo = new Zoo("shanghai zoo", Arrays.asList(horse, deer, python), Arrays.asList(horseGroup, zhouXun, pythonGroup));
     
     public static Date getDate(String d) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -65,7 +65,16 @@ public class SimpleData {
     public static List<Keeper> getThreeKeeperList() {
         return Arrays.asList(pythonGroup, tigerGroup, dolphinGroup);
     }
+    public static Stream<Keeper> getTwoKeepers() {
+        return Stream.of(pythonGroup, zhouXun);
+    }
+    public static List<Keeper> getTwoKeeperList() {
+        return Arrays.asList(pythonGroup, zhouXun);
+    }
     
+    public static Stream<Zoo> getTwoZoos() {
+        return Stream.of(hzZoo, shZoo);
+    }
     public static List<Zoo> getTwoZooList() {
         return Arrays.asList(hzZoo, shZoo);
     }
