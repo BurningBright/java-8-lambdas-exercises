@@ -72,6 +72,13 @@ public class SimpleData {
         return Arrays.asList(pythonGroup, zhouXun);
     }
     
+    public static Stream<Animal> getThreeAnimals() {
+        return Stream.of(python, tiger, horse);
+    }
+    public static List<Animal> getThreeAnimalList() {
+        return Arrays.asList(python, tiger, horse);
+    }
+    
     public static Stream<Zoo> getTwoZoos() {
         return Stream.of(hzZoo, shZoo);
     }
