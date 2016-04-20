@@ -46,7 +46,7 @@ public class OptimisationExample {
                  .forEach(container::add);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     // BEGIN slowSumOfSquares
     public int slowSumOfSquares() {
         return linkedListOfNumbers.parallelStream()
@@ -55,7 +55,7 @@ public class OptimisationExample {
     }
     // END slowSumOfSquares
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int fastSumOfSquares() {
         return Exercises.replaceThisWithSolution();
     }

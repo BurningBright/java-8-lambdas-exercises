@@ -40,7 +40,7 @@ public class ArraySum {
                           .collect(toList());
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     // BEGIN serial
 public int serialArraySum() {
     return albums.stream()
@@ -50,7 +50,7 @@ public int serialArraySum() {
 }
     // END serial
 
-    @GenerateMicroBenchmark
+    @Benchmark
     // BEGIN parallel
 public int parallelArraySum() {
     return albums.parallelStream()
