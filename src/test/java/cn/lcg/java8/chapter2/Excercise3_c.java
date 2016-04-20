@@ -15,8 +15,8 @@ public class Excercise3_c {
     
     @Test
     public void checkReload() {
-//        InPred ip = x -> x > 0;
-//        assert(ip.test(100));
+        InPred ip = x -> x > 0;
+        assert(ip.test(100));
         assert(check(x -> x > 0));
         assert(check_Reload(x -> x > 0));
     }
