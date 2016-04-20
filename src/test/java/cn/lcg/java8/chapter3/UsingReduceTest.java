@@ -17,7 +17,7 @@ public class UsingReduceTest {
     @Test
     public void testFilter() {
         List<Integer> result = FilterUsingReduceExercise.filter(Stream.of(1, 2, 3, 4, 5, 6), a -> a>3);
-        assertEquals(Arrays.asList(4,5), result);
+        assertEquals(Arrays.asList(4,5,6), result);
     }
     
     @Test
