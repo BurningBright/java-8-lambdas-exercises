@@ -6,8 +6,9 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 /**
@@ -18,13 +19,16 @@ import javax.imageio.ImageIO;
  */
 public class WHScaleStrategy implements PictureScaleStrategy {
     
-    public void scale(String srcImageFile, String result) {
+    public WHScaleStrategy(InputStream imageStreamIn, OutputStream imageStreamOut) {
+        
+    }
+    
+    public void scale(InputStream imageStreamIn, OutputStream imageStreamOut) {
         String fmt="png"; int height =100; int width=300; boolean bb=true;
         
         try {
             double ratio = 0.0; // 缩放比例
-            File f = new File(srcImageFile);
-            BufferedImage bi = ImageIO.read(f);
+            BufferedImage bi = ImageIO.read(imageStreamIn);
             Image itemp = bi.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             // 计算比例
             if ((bi.getHeight() > height) || (bi.getWidth() > width)) {
@@ -50,7 +54,7 @@ public class WHScaleStrategy implements PictureScaleStrategy {
                 g.dispose();
                 itemp = image;
             }
-            ImageIO.write((BufferedImage) itemp, fmt, new File(result));
+            ImageIO.write((BufferedImage) itemp, fmt, imageStreamOut);
         } catch (IOException e) {
             e.printStackTrace();
         }

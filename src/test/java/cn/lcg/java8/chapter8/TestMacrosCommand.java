@@ -1,4 +1,4 @@
-package cn.lcg.java8.chapter8.command;
+package cn.lcg.java8.chapter8;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,7 +7,16 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class TestMacros {
+import cn.lcg.java8.chapter8.command.Call;
+import cn.lcg.java8.chapter8.command.Macro;
+import cn.lcg.java8.chapter8.command.Mobile;
+import cn.lcg.java8.chapter8.command.Sms;
+/**
+ * @Description 测试宏命令者模式
+ * @author leon
+ * @date 2016年4月25日 上午10:33:10
+ */
+public class TestMacrosCommand {
     
     @Test
     public void baseCommand() {

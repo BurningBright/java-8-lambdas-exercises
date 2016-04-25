@@ -1,10 +1,11 @@
 package cn.lcg.java8.chapter8.strategy;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
 
 /**
  * @Description 具体的缩放者
@@ -19,9 +20,11 @@ public class Scaling {
         this.pss = pss;
     }
     
-    public void scale(String in, File out) throws IOException {
-//        try (OutputStream outStream = new FileOutputStream(outFile)) {
-//            Files.copy(inFile, strategy.compress(outStream));
-//        }
+    public void scale(File in, File out) throws IOException {
+        try (InputStream inStream = new FileInputStream(in);
+                OutputStream outStream = new FileOutputStream(out)) {
+            pss.scale(inStream, outStream);
+        }
     }
+    
 }

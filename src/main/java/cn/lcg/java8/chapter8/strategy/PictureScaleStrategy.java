@@ -1,5 +1,8 @@
 package cn.lcg.java8.chapter8.strategy;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * @Description 用于图片缩放
  * @author leon
@@ -7,7 +10,7 @@ package cn.lcg.java8.chapter8.strategy;
  */
 public interface PictureScaleStrategy {
     
-    public void scale(String srcImageFile, String result);
+    public void scale(InputStream imageStreamIn, OutputStream imageStreamOut);
     
     /**
      * 缩放图像（按比例缩放）
