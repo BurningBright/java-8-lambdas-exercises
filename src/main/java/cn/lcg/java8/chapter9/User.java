@@ -4,12 +4,12 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.vertx.java.core.Handler;
-import org.vertx.java.core.Vertx;
-import org.vertx.java.core.buffer.Buffer;
-import org.vertx.java.core.eventbus.EventBus;
-import org.vertx.java.core.net.NetSocket;
-import org.vertx.java.deploy.Verticle;
+import io.vertx.core.Handler;
+import io.vertx.core.Verticle;
+import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.net.NetSocket;
 
 public class User implements Handler<Buffer>{
     
@@ -21,10 +21,12 @@ public class User implements Handler<Buffer>{
     
     private Optional<String> name;
     
+    @SuppressWarnings("unchecked")
     public User(NetSocket socket, Verticle verticle) {
         Vertx vertx = verticle.getVertx();
         this.socket = socket;
-        names = vertx.sharedData().getSet("names");
+//        names = vertx.sharedData().getSet("names");
+        names = (Set<String>) vertx.sharedData().getLocalMap("names");
         eventBus = vertx.eventBus();
         name = Optional.empty();
     }
@@ -33,8 +35,10 @@ public class User implements Handler<Buffer>{
     public void handle(Buffer buffer) {
         newline.splitAsStream(buffer.toString()).forEach(line -> {
             if(!name.isPresent()) {
+                System.out.println("no");
 //                setName(line);
             } else {
+                System.out.println("no");
 //                handleMessage(line);
             }
         });
