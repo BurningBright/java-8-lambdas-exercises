@@ -16,32 +16,35 @@ public class User implements Handler<Buffer>{
     private final Pattern newline = Pattern.compile("\\n");
     
     private final NetSocket socket;
-    private final Set<String> names;
+    private final Set names;
     private final EventBus eventBus;
     
     private Optional<String> name;
     
-    @SuppressWarnings("unchecked")
     public User(NetSocket socket, Verticle verticle) {
         Vertx vertx = verticle.getVertx();
         this.socket = socket;
 //        names = vertx.sharedData().getSet("names");
-        names = (Set<String>) vertx.sharedData().getLocalMap("names");
+        names = vertx.sharedData().getLocalMap("names").keySet();
         eventBus = vertx.eventBus();
         name = Optional.empty();
+        System.out.println("created");
     }
     
     @Override
     public void handle(Buffer buffer) {
+        System.out.println("handled " + buffer.toString());
+        
         newline.splitAsStream(buffer.toString()).forEach(line -> {
             if(!name.isPresent()) {
                 System.out.println("no");
 //                setName(line);
             } else {
-                System.out.println("no");
+                System.out.println("yes");
 //                handleMessage(line);
             }
         });
+        
     }
 
 }
