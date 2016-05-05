@@ -1,10 +1,8 @@
 package cn.lcg.java8.chapter9;
 
-import cn.lcg.java8.chapter9.util.Runner;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
-import io.vertx.core.Verticle;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.net.NetClient;
@@ -13,7 +11,7 @@ import io.vertx.core.net.NetSocket;
 public class ChatClient extends AbstractVerticle{
     
     public static void main(String[] args) {
-        Runner.runExample(ChatClient.class);
+        //Runner.runExample(ChatClient.class);
         /*
         Thread in = new Thread(() ->{
             Scanner input = new Scanner(System.in);
@@ -27,20 +25,28 @@ public class ChatClient extends AbstractVerticle{
             
         });
         */
+        
+        final Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new ChatClient());
+        vertx.deployVerticle(new ChatVerticle());
     }
 
     public void start() throws Exception {
         NetClient client = vertx.createNetClient();
         client.connect(8080, "127.0.0.1", new SendMsg(client, vertx));
         
-        
+        vertx.eventBus().consumer("chat.to.client", message -> {
+            System.out.println("client received: " + message.body());
+        });
         
     }
 }
 
 class SendMsg implements Handler<AsyncResult<NetSocket>> {
     
+    @SuppressWarnings("unused")
     private int count = 0;
+    @SuppressWarnings("unused")
     private NetClient client;
     private EventBus eb;
     
@@ -49,16 +55,13 @@ class SendMsg implements Handler<AsyncResult<NetSocket>> {
         this.client = client;
         
         eb = vertx.eventBus();
-        eb.consumer("chat.to.client", message -> {
-            System.out.println("client received" + message.body());
-        });
+        
     }
     
     public void handle(AsyncResult<NetSocket> async) {
         if(async.succeeded()) {
-            System.out.println("connected");
             
-            eb.publish("chat.to.server", "Hello Bus "+ Math.random());
+            System.out.println("connected");
             
             NetSocket socket = async.result().write("Hello World "+ Math.random());
             socket.handler(buffer -> {
@@ -76,6 +79,8 @@ class SendMsg implements Handler<AsyncResult<NetSocket>> {
                     this.handle(async);
                 }
                 */
+                
+                eb.publish("chat.to.server", "Hello Bus "+ Math.random());
             });
         } else {
             System.out.println(async.cause().getMessage());
